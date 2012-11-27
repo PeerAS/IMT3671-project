@@ -29,9 +29,9 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock x:Name="DrinkingTimeQuestion" Text="FOR HOW LONG HAVE YOU BEEN DRINKING?" Margin="0,46,0,342" TextWrapping="Wrap" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBox x:Name="DrinkingTimeHours" Text="0" Margin="97,229,299,320" HorizontalAlignment="Center" Height="70" Width="60" TextAlignment="Right" InputScope="Number"/>
+            <TextBox x:Name="DrinkingTimeHours" Text="0" Margin="97,229,299,320" HorizontalAlignment="Center" Height="70" Width="60" TextAlignment="Right" InputScope="Number" GotFocus="DrinkingTimeHours_GotFocus"/>
             <TextBlock x:Name="DrinkingTimeTextHours" Text="Hours" Margin="162,251,193,322" />
-            <TextBox x:Name="DrinkingTimeMinutes" Text="0" InputScope="Number" Margin="97,302,299,247" Height="70" TextAlignment="Right"/>
+            <TextBox x:Name="DrinkingTimeMinutes" Text="0" InputScope="Number" Margin="97,302,299,247" Height="70" TextAlignment="Right" GotFocus="DrinkingTimeMinutes_GotFocus"/>
             <TextBlock x:Name="DrinkingTimeTextMinutes" Text="Minutes" Margin="157,323,213,247"/>
             <Button x:Name="DrinkingTimeContinue" Content="Continue" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="157,422,158,128" Click="DrinkingTimeContinue_Click" />
         </Grid>

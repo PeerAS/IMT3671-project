@@ -47,10 +47,10 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Button x:Name="Person_1" Content="Register New Person" Margin="85,65,75,473" Click="Person_1_Click"/>
-            <Button x:Name="Person_2" Content="Register New Person" Margin="85,171,75,367" RenderTransformOrigin="0.624,0.568" Click="Person_2_Click"/>
-            <Button x:Name="Person_3" Content="Register New Person" Margin="85,285,75,253" Click="Person_3_Click" />
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" >
+            <Button x:Name="Person_1" Content="" Margin="85,65,75,473" Click="Person_1_Click"/>
+            <Button x:Name="Person_2" Content="" Margin="85,171,75,367" RenderTransformOrigin="0.624,0.568" Click="Person_2_Click"/>
+            <Button x:Name="Person_3" Content="" Margin="85,285,75,253" Click="Person_3_Click" />
             <Button x:Name="Random_Person" Content="Other Person" Margin="85,391,75,147" Click="Other_Person_Click" />
         </Grid>
 

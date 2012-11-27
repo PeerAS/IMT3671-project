@@ -8,21 +8,48 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Mobile_project.Resources;
+using Mobile_project.ViewModel;
+
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Mobile_project
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private bool person1Register = false;
-        private bool person2Register = false;
-        private bool person3Register = false;
+        private string[] names;
+        private double[] weights;
+        const int MAX_USERS = 3;
+        private int i;
         // Constructor
         public MainPage()
         {
             InitializeComponent();
+            names = new string[MAX_USERS]{"Register New Person", "Register New Person", "Register New Person"};
+            weights = new double[MAX_USERS];
+            i = 0;
+            this.DataContext = App._appViewModel;
 
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
+            if (App._appViewModel.person.Count() != 0)
+            {
+                var personname = from personTable in App._appViewModel.person
+                                 where personTable.personID <= MAX_USERS
+                                 select new { Name = personTable.personName, weight = personTable.personWeight };
+
+                
+                foreach (var item in personname)
+                {
+                    names[i] = item.Name;
+                    weights[i] = item.weight;
+                    i++;
+                }
+
+                Person_1.Content = names[0];
+                Person_2.Content = names[1];
+                Person_3.Content = names[2];
+            }
         }
 
         private void Other_Person_Click(object sender, RoutedEventArgs e)
@@ -32,7 +59,8 @@ namespace Mobile_project
 
         private void Person_1_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("/DrinkOverview.xaml", UriKind.Relative));
+            double temp_weight = weights[1];
+            this.NavigationService.Navigate(new Uri("/DrinkingTime.xaml?weight="+temp_weight, UriKind.Relative));
         }
 
         private void Person_2_Click(object sender, RoutedEventArgs e)
