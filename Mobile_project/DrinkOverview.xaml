@@ -1,0 +1,51 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Mobile_project.DrinkOverview"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="When Can I Drive" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="Drinks" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" >
+            <TextBlock x:Name="DrinksBeer" Text="Beer 4.5%" VerticalAlignment="Center" Margin="10,10,0,556" Height="53" TextAlignment="Center" HorizontalAlignment="Left" Width="206" FontSize="35"/>
+            <TextBox x:Name="BeerAmount_05" Text="0" Margin="42,72,344,477" Height ="70" Width="70" InputScope="Number"/>
+            <TextBlock x:Name="BeerAmount_05_Text" Text="0.5 L" Height="53" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="122,82,239,484" Width="95" FontSize="35"/>
+            <TextBox x:Name="BeerAmount_33cl" Text="0" Height="70" Width="70" Margin="42,158,344,391"/>
+            <TextBlock x:Name="BeerAmount_33cl_Text" Text="0.33 L" Margin="121,168,240,398" FontSize="35" RenderTransformOrigin="0.751,-0.386"/>
+            <TextBlock x:Name="DrinksWine" Text="Wine 12%" Height="53" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="265,10,29,556" FontSize="35" Width="162"/>
+            <TextBox x:Name="WineAmount_15cl" Text="0" Height="70" Width="70" Margin="270,72,116,477"/>
+            <TextBlock x:Name="WineAmount_15cl_Text" Text="15 cl" Height="54" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="344,81,29,484" FontSize="36" Width="83"/>
+            <TextBlock x:Name="StrongWine" Text="Strong Wine 20%" Margin="0,261,220,296" FontSize="30"/>
+            <TextBox x:Name="StrongWine_75cl" Text="0" Height="70" Width="70" Margin="42,313,344,236"/>
+            <TextBlock x:Name="StrongWine_75cl_Text" Text="7.5 cl" Margin="116,323,240,243" FontSize="35"/>
+            <TextBlock x:Name="Vodka" Text="Vodka 40%" Margin="265,259,10,296" FontSize="35"/>
+            <TextBox x:Name="VodkaAmount_4cl" Text="0" Height="70" Width="70" Margin="265,313,121,236"/>
+            <TextBlock x:Name="VodkaAmount_4cl_Text" Text="4 cl" FontSize="35" Margin="352,323,29,243"/>
+            
+            <Button x:Name="DrinksContinue_Button" Content="Calculate" Height="85" Margin="116,445,112,89" FontSize="35" Click="DrinksContinue_Button_Click"/>
+        
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>
