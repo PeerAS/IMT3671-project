@@ -29,9 +29,9 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock x:Name="RegisterNameText" Height="50" Text="Name" Margin="0,97,293,472" FontSize="30"/>
-            <TextBox x:Name="RegisterNameInput" Height="70" Text="" Margin="163,82,0,469" InputScope="Number"/>
+            <TextBox x:Name="RegisterNameInput" Height="70" Text="" Margin="163,82,0,469"/>
             <TextBlock x:Name="RegisterWeightText" Height="50" Text="Weight(kg)" Margin="0,247,293,322" FontSize="30"/>
-            <TextBox x:Name="RegisterWeightInput" Height="70" Text="" Margin="163,232,0,319"/>
+            <TextBox x:Name="RegisterWeightInput" Height="70" Text="" Margin="163,232,0,319"  InputScope="Number"/>
             <Button x:Name="RegisterButton" Content="Register" Margin="101,395,101,139" Click="RegisterButton_Click" />
         </Grid>
     </Grid>
