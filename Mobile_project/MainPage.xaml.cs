@@ -23,6 +23,7 @@ namespace Mobile_project
         
         const int MAX_USERS = 3;
         private int arrayIterator;
+        private int personID;
         // Constructor
         public MainPage()
         {
@@ -49,7 +50,7 @@ namespace Mobile_project
         {
             var person1 = from personTable in App._appViewModel.person
                           where personTable.personID == 1
-                          select new { Name = personTable.personName, weight = personTable.personWeight };
+                          select new { Id = personTable.personID };
 
             if (person1.Count() == 0)
             {
@@ -57,8 +58,11 @@ namespace Mobile_project
             }
             else if (person1.Count() == 1)
             {
+                foreach(var person in person1)
+                    personID = person.Id;
+
                 double temp_weight = weights[0];
-                this.NavigationService.Navigate(new Uri("/DrinkingTime.xaml?weight=" + temp_weight, UriKind.Relative));
+                this.NavigationService.Navigate(new Uri("/DrinkingTime.xaml?id="+personID, UriKind.Relative));
             }
            
         }

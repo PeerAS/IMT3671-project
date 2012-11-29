@@ -81,6 +81,25 @@ namespace Database.Model
             }
         }
 
+        private string _personSex;
+        [Column]
+        public string personSex
+        {
+            get
+            {
+                return _personSex;
+            }
+            set
+            {
+                if (_personSex != value)
+                {
+                    NotifyPropertyChanging("personSex");
+                    _personSex = value;
+                    NotifyPropertyChanged("personSex");
+                }
+            }
+        }
+
         public event PropertyChangingEventHandler PropertyChanging;
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -29,18 +29,22 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" >
             <TextBlock x:Name="DrinksBeer" Text="Beer 4.5%" VerticalAlignment="Center" Margin="10,10,0,556" Height="53" TextAlignment="Center" HorizontalAlignment="Left" Width="206" FontSize="35"/>
-            <TextBox x:Name="BeerAmount_05" Text="0" Margin="42,72,344,477" Height ="70" Width="70" InputScope="Number"/>
+            <TextBox x:Name="BeerAmount_05" Text="0" Margin="42,72,344,477" Height ="70" Width="70" InputScope="Number" GotFocus="BeerAmount_05_GotFocus" LostFocus="BeerAmount_05_LostFocus"/>
             <TextBlock x:Name="BeerAmount_05_Text" Text="0.5 L" Height="53" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="122,82,239,484" Width="95" FontSize="35"/>
-            <TextBox x:Name="BeerAmount_33cl" Text="0" Height="70" Width="70" Margin="42,158,344,391"/>
+            <TextBox x:Name="BeerAmount_33cl" Text="0" Height="70" Width="70" Margin="42,158,344,391" GotFocus="BeerAmount_33cl_GotFocus" InputScope="Number" LostFocus="BeerAmount_33cl_LostFocus"/>
             <TextBlock x:Name="BeerAmount_33cl_Text" Text="0.33 L" Margin="121,168,240,398" FontSize="35" RenderTransformOrigin="0.751,-0.386"/>
-            <TextBlock x:Name="DrinksWine" Text="Wine 12%" Height="53" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="265,10,29,556" FontSize="35" Width="162"/>
-            <TextBox x:Name="WineAmount_15cl" Text="0" Height="70" Width="70" Margin="270,72,116,477"/>
+            <TextBlock x:Name="DrinksWine" Height="53" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="265,10,29,556" FontSize="35" Width="162">
+            	<Run Text="Wine "/>
+            	<Run Text="15"/>
+            	<Run Text="%"/>
+            </TextBlock>
+            <TextBox x:Name="WineAmount_15cl" Text="0" Height="70" Width="70" Margin="270,72,116,477" GotFocus="WineAmount_15cl_GotFocus" InputScope="Number" LostFocus="WineAmount_15cl_LostFocus"/>
             <TextBlock x:Name="WineAmount_15cl_Text" Text="15 cl" Height="54" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="344,81,29,484" FontSize="36" Width="83"/>
             <TextBlock x:Name="StrongWine" Text="Strong Wine 20%" Margin="0,261,220,296" FontSize="30"/>
-            <TextBox x:Name="StrongWine_75cl" Text="0" Height="70" Width="70" Margin="42,313,344,236"/>
+            <TextBox x:Name="StrongWine_75cl" Text="0" Height="70" Width="70" Margin="42,313,344,236" GotFocus="StrongWine_75cl_GotFocus" InputScope="Number" LostFocus="StrongWine_75cl_LostFocus"/>
             <TextBlock x:Name="StrongWine_75cl_Text" Text="7.5 cl" Margin="116,323,240,243" FontSize="35"/>
             <TextBlock x:Name="Vodka" Text="Vodka 40%" Margin="265,259,10,296" FontSize="35"/>
-            <TextBox x:Name="VodkaAmount_4cl" Text="0" Height="70" Width="70" Margin="265,313,121,236"/>
+            <TextBox x:Name="VodkaAmount_4cl" Text="0" Height="70" Width="70" Margin="265,313,121,236" GotFocus="VodkaAmount_4cl_GotFocus" InputScope="Number" LostFocus="VodkaAmount_4cl_LostFocus"/>
             <TextBlock x:Name="VodkaAmount_4cl_Text" Text="4 cl" FontSize="35" Margin="352,323,29,243"/>
             
             <Button x:Name="DrinksContinue_Button" Content="Calculate" Height="85" Margin="116,445,112,89" FontSize="35" Click="DrinksContinue_Button_Click"/>

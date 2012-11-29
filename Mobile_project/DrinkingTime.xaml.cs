@@ -14,6 +14,7 @@ namespace Mobile_project
     {
         
         private double weight;
+        private int personID;
 
         private string time_hours;
         private string time_minutes;
@@ -39,24 +40,27 @@ namespace Mobile_project
             total_time = time_hours + ":" + time_minutes;
 
 
-            drinkingStarted = Convert.ToDateTime(total_time);
-            currentTime = DateTime.Now;
+            //drinkingStarted = Convert.ToDateTime(total_time);
+            //currentTime = DateTime.Now;
 
-            drinkingTime = currentTime.Subtract(drinkingStarted);
-            temp_difference = drinkingTime.ToString();
+            //drinkingTime = currentTime.Subtract(drinkingStarted);
+            temp_difference = time_hours;
 
-            this.NavigationService.Navigate(new Uri("/DrinkOverview.xaml?time="+temp_difference, UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("/DrinkOverview.xaml?time="+temp_difference + "&id=" +personID, UriKind.Relative));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             string weightString;
+            string personIDString;
 
             base.OnNavigatedTo(e);
 
             NavigationContext.QueryString.TryGetValue("weight", out weightString);
+            NavigationContext.QueryString.TryGetValue("id", out personIDString);
 
             weight = Convert.ToDouble(weightString);
+            personID = Convert.ToInt32(personIDString);
         }
 
         private void DrinkingTimeHours_GotFocus(object sender, RoutedEventArgs e)

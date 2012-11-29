@@ -21,5 +21,14 @@ namespace Mobile_project
         {
             this.NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            string currentBloodAlc;
+            NavigationContext.QueryString.TryGetValue("bloodAlc", out currentBloodAlc);
+
+            ResultAlcoholLevelDisplay.Text = currentBloodAlc;
+        }
     }
 }
