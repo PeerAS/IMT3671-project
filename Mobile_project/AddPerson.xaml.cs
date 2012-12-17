@@ -35,7 +35,7 @@ namespace Mobile_project
             
             InitializeComponent();
 
-            this.DataContext = App._appViewModel;
+            this.DataContext = App._appViewModel; //sets the datacontext for the database calls
 
         }
 
@@ -44,9 +44,9 @@ namespace Mobile_project
             NavigationContext.QueryString.TryGetValue("mode", out mode);
             NavigationContext.QueryString.TryGetValue("id", out tempID);
 
-            if (mode == "Edit")
+            if (mode == "Edit") //if we are in edit mode
             {
-                personID = Convert.ToInt16(tempID);
+                personID = Convert.ToInt32(tempID);
                 var personname = from personTable in App._appViewModel.person
                                  where personTable.personID == personID
                                  select new { name = personTable.personName, weight = personTable.personWeight, sex = personTable.personSex };
@@ -58,7 +58,7 @@ namespace Mobile_project
                     sex = item.sex;
                 }                
 
-                RadioFemale.Visibility = System.Windows.Visibility.Collapsed;
+                RadioFemale.Visibility = System.Windows.Visibility.Collapsed;   //removes the radio buttons from the screen
                 RadioMale.Visibility = System.Windows.Visibility.Collapsed;
 
             }
@@ -71,7 +71,7 @@ namespace Mobile_project
             base.OnNavigatedTo(e);
         }
 
-        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        private void RegisterButton_Click(object sender, RoutedEventArgs e) //when the register button is clicked
         {
             if (RadioMale.IsChecked == false && RadioFemale.IsChecked == false && mode != "Edit")
             {
@@ -87,7 +87,7 @@ namespace Mobile_project
             }
             else
             {
-                if (mode == "Edit")
+                if (mode == "Edit") //this is where the database update function will be used
                 {
                     weight = Convert.ToDouble(this.RegisterWeightInput.Text);
 
@@ -96,7 +96,7 @@ namespace Mobile_project
                                      select personTable;
                 }
                 else
-                {
+                {   
                     weight = Convert.ToDouble(this.RegisterWeightInput.Text);
                     if (RadioMale.IsChecked == true)
                         sex = "Male";
@@ -111,7 +111,7 @@ namespace Mobile_project
 
                     };
 
-                    App._appViewModel.AddPerson(newPerson);
+                    App._appViewModel.AddPerson(newPerson); //adds a new person to the database
                 }
                 this.NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
@@ -119,7 +119,7 @@ namespace Mobile_project
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            App._appViewModel.SaveChangesToDB();
+            App._appViewModel.SaveChangesToDB();    //saves the changes to the database when we leave the page
             base.OnNavigatedFrom(e);
         }      
     }

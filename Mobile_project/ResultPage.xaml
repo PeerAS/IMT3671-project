@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -28,11 +29,11 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock x:Name="ResultDrivingTime" Text="You are able to drive at" FontSize="35" Margin="49,49,49,513"/>
-            <TextBlock x:Name="ResultDisplayTime" Text="0" Margin="97,125,96,430" TextAlignment="Center" FontSize="35"/>
+            <TextBlock x:Name="ResultDrivingTime" Text="You are able to drive at" TextAlignment="Center" FontSize="35" Margin="10,49,10,513"/>
+            <TextBlock x:Name="ResultDisplayTime" Text="0" Margin="49,125,49,430" TextAlignment="Center" FontSize="35"/>
             <TextBlock x:Name="ResultAlcoholLevel" Text="Your current blood alcohol level is: " FontSize="35" TextWrapping="Wrap" TextAlignment="Center" Margin="0,241,0,274"/>
             <TextBlock x:Name="ResultAlcoholLevelDisplay" Text="0" Margin="0,345,0,212" FontSize="35" TextAlignment="Center"/>
-            <Button x:Name="ResultNotification" Content="Notify Me" Margin="97,398,96,0" Height="95" VerticalAlignment="Top"/>
+            <Button x:Name="ResultNotification" Content="Notify Me" Margin="97,398,96,0" Height="95" VerticalAlignment="Top" Click="ResultNotification_Click"/>
             <Button x:Name="ResultMainMenu" Content="Main Menu" Margin="97,498,96,27" Click="ResultMainMenu_Click" />
         </Grid>
     </Grid>

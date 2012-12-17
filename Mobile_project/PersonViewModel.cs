@@ -13,7 +13,7 @@ namespace Mobile_project.ViewModel
 
         public PersonViewModel(string personDBConnectionString)
         {
-            personDB = new DatabaseContext(personDBConnectionString);
+            personDB = new DatabaseContext(personDBConnectionString);   //creates a new database with a connection
         }
 
         private ObservableCollection<PersonData> _person;
@@ -33,12 +33,12 @@ namespace Mobile_project.ViewModel
             }
         }
 
-        public void SaveChangesToDB()
+        public void SaveChangesToDB()   //save changes to the database
         {
             personDB.SubmitChanges();
         }
 
-        public void LoadFromDatabase()
+        public void LoadFromDatabase()  //get all the items from the database and put them in an observable collection
         {
             var personItemsInDB = from PersonData personsInTable in personDB.PersonDataTable
                                   select personsInTable;
@@ -46,7 +46,7 @@ namespace Mobile_project.ViewModel
             person = new ObservableCollection<PersonData>(personItemsInDB);
         }
 
-        public void AddPerson(PersonData newPerson)
+        public void AddPerson(PersonData newPerson) //add a new person
         {
             person.Add(newPerson);
 
@@ -54,7 +54,7 @@ namespace Mobile_project.ViewModel
             
         }
 
-        public void UpdatePerson(int personID)
+        public void UpdatePerson(int personID)  //doesn't work yet
         {
             IQueryable test = from PersonData personExist in personDB.PersonDataTable
                               where personExist.personID == personID

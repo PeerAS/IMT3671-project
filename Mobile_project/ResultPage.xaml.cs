@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Phone.Scheduler;
 
 namespace Mobile_project
 {
@@ -21,9 +22,9 @@ namespace Mobile_project
         {
             InitializeComponent();
 
-            currentBloodAlc = string.Format("0.00", currentBloodAlc);
+            currentBloodAlc = string.Format("0.00", currentBloodAlc);   //set the proper format for the alcohol level
             hoursTilDrivingLimit = new DateTime(0);
-            legalDrivingLimit = 0.2;
+            legalDrivingLimit = 0.2; //the legal driving limit, this will have to be changed to reflect different countries by localization
         }
 
         private void ResultMainMenu_Click(object sender, RoutedEventArgs e)
@@ -43,14 +44,25 @@ namespace Mobile_project
             ResultAlcoholLevelDisplay.Text = currentBloodAlc;
             bloodAlcoholLevel = Convert.ToDouble(currentBloodAlc);
             
-            while (bloodAlcoholLevel > legalDrivingLimit)
+            while (bloodAlcoholLevel >= legalDrivingLimit)
             {
+                //this must be changed to reflect sex
                 bloodAlcoholLevel = bloodAlcoholLevel - 0.15;
                 hours++;
             }
+
             hoursTilDrivingLimit = DateTime.Now;
-            hoursTilDrivingLimit = hoursTilDrivingLimit.AddHours(hours);
+            hoursTilDrivingLimit = hoursTilDrivingLimit.AddHours(hours);    //gets the time when one is under the legal driving limit
             ResultDisplayTime.Text = Convert.ToString(hoursTilDrivingLimit);
+        }
+
+        private void ResultNotification_Click(object sender, RoutedEventArgs e) //sends a notification to the user when the user can drive again
+        {
+            Alarm drivingAlarm = new Alarm("Sober notification");
+            drivingAlarm.Content = "You are now able to drive. Drive carefully";
+            drivingAlarm.BeginTime = hoursTilDrivingLimit;
+
+            ScheduledActionService.Add(drivingAlarm);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Mobile_project
 
         private void DrinksContinue_Button_Click(object sender, RoutedEventArgs e)
         {
-            double gramofAlcInBeer05 = 18;
+            double gramofAlcInBeer05 = 18;      //the amount of alcohol in each drink
             double gramOfAlcInBeer33 = 12.6;
             double gramOfAlcInWine = 14.4;
             double gramOfAlcInStrongWine = 13.2;
@@ -72,7 +72,7 @@ namespace Mobile_project
                 personSex = randomSex;
             }
 
-            noOfBeer05 = Convert.ToInt32(BeerAmount_05.Text);
+            noOfBeer05 = Convert.ToInt32(BeerAmount_05.Text);   //convert the user input
             noOfBeer33 = Convert.ToInt32(BeerAmount_33cl.Text);
             noOfWine = Convert.ToInt32(WineAmount_15cl.Text);
             noOfStrongWine = Convert.ToInt32(StrongWine_75cl.Text);
@@ -80,7 +80,7 @@ namespace Mobile_project
 
             totalGramOfAlc = ((gramofAlcInBeer05 * noOfBeer05) + (gramOfAlcInBeer33 * noOfBeer33) + (gramOfAlcInStrongWine * noOfStrongWine) + (gramOfAlcInVodka * noOfVodka) + (gramOfAlcInWine * noOfWine));
 
-            if (personSex == "Male")
+            if (personSex == "Male")    //different absorbtion-rates for men and women
                 currentBloodAlcLevel = ((totalGramOfAlc / (weight * 0.70)) - (0.15 * timeDifference));
             else if (personSex == "Female")
                 currentBloodAlcLevel = ((totalGramOfAlc / (weight * 0.60)) - (0.15 * timeDifference));
@@ -146,7 +146,7 @@ namespace Mobile_project
             VodkaAmount_4cl.Text = "";
         }
 
-        #endregion
+        #endregion//region for input focus
 
         #region LostFocus functions
 

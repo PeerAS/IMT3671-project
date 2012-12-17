@@ -19,12 +19,9 @@ namespace Mobile_project
         private string time_hours;
         private string time_minutes;
         private string total_time;
-        private string currentTimeString;
         private string randomPersonSex;
-        private string weightString;
+        private string weightString;     
 
-        private DateTime drinkingStarted;     
-        private TimeSpan drinkingTime;
         private DateTime currentTime;
 
         
@@ -36,17 +33,23 @@ namespace Mobile_project
         private void DrinkingTimeContinue_Click(object sender, RoutedEventArgs e)
         {
             string temp_difference;
+            int timeCurrentHours;
+            int timeStartedHours;
+            int timeDifference;
+            
 
-            time_hours = DrinkingTimeHours.Text.ToString();
-            time_minutes = DrinkingTimeMinutes.Text.ToString();
+            time_hours = DrinkingTimeHours.Text.ToString(); //gets the user inputed time, minutes are not used atm
+            time_minutes = DrinkingTimeMinutes.Text.ToString(); 
             total_time = time_hours + ":" + time_minutes;
 
+            
+            timeStartedHours = Convert.ToInt32(time_hours);
+            currentTime = DateTime.Now;
+            timeCurrentHours = currentTime.Hour;
 
-            //drinkingStarted = Convert.ToDateTime(total_time);
-            //currentTime = DateTime.Now;
-
-            //drinkingTime = currentTime.Subtract(drinkingStarted);
-            temp_difference = time_hours;
+            timeDifference = timeCurrentHours - timeStartedHours;   //gets the time difference between now and when the drinking started
+                                                                    //might add an option for half hours as well
+            temp_difference = Convert.ToString(timeDifference);
 
             if (randomPersonSex == null)
                 this.NavigationService.Navigate(new Uri("/DrinkOverview.xaml?time=" + temp_difference + "&id=" + personID, UriKind.Relative));
@@ -70,7 +73,7 @@ namespace Mobile_project
             personID = Convert.ToInt32(personIDString);
         }
 
-        private void DrinkingTimeHours_GotFocus(object sender, RoutedEventArgs e)
+        private void DrinkingTimeHours_GotFocus(object sender, RoutedEventArgs e)   //empties the inputs when you tap them so you don't manually have to remove the 00
         {
             DrinkingTimeHours.Text = "";
         }
