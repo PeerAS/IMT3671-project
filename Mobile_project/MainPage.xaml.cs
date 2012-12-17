@@ -19,11 +19,13 @@ namespace Mobile_project
     {
         private string[] names;
         private double[] weights;
-        static int[] registered;
+        
         
         const int MAX_USERS = 3;
         private int arrayIterator;
         private int personID;
+        private string mode;
+
         // Constructor
         public MainPage()
         {
@@ -31,7 +33,6 @@ namespace Mobile_project
             InitializeComponent();
             names = new string[MAX_USERS]{"Register New Person", "Register New Person", "Register New Person"};
             weights = new double[MAX_USERS]{0, 0, 0};
-            registered = new int[MAX_USERS]{ 0, 0, 0 };
 
             arrayIterator = 0;
             this.DataContext = App._appViewModel;
@@ -41,6 +42,33 @@ namespace Mobile_project
            
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            arrayIterator = 0;
+
+            if (App._appViewModel.person.Count() != 0)
+            {
+                var personname = from personTable in App._appViewModel.person   //select from the observable collection person
+                                 where personTable.personID <= MAX_USERS        //and put it in a var.
+                                 select new { Name = personTable.personName, weight = personTable.personWeight };
+
+
+                foreach (var item in personname)
+                {
+                    names[arrayIterator] = item.Name;
+                    weights[arrayIterator] = item.weight;
+                    arrayIterator++;
+                }
+            }
+
+            Person_1.Content = names[0];
+            Person_2.Content = names[1];
+            Person_3.Content = names[2];
+
+
+            base.OnNavigatedTo(e);
+        }
+
         private void Other_Person_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("/RandomPerson.xaml", UriKind.Relative));
@@ -48,6 +76,12 @@ namespace Mobile_project
 
         private void Person_1_Click(object sender, RoutedEventArgs e)
         {
+            if (mode == "Edit")
+            {
+                personID = 1;
+                this.NavigationService.Navigate(new Uri("/AddPerson.xaml?mode="+mode+"&id="+personID, UriKind.Relative));
+                
+            }
             var person1 = from personTable in App._appViewModel.person
                           where personTable.personID == 1
                           select new { Id = personTable.personID };
@@ -102,38 +136,22 @@ namespace Mobile_project
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void edit_delete_person_OnClick(object sender, EventArgs e)
         {
-            arrayIterator = 0;
-
-            if (App._appViewModel.person.Count() != 0)
-            {
-                var personname = from personTable in App._appViewModel.person   //select from the observable collection person
-                                 where personTable.personID <= MAX_USERS        //and put it in a var.
-                                 select new { Name = personTable.personName, weight = personTable.personWeight };
-
-
-                foreach (var item in personname)
-                {
-                    names[arrayIterator] = item.Name;
-                    weights[arrayIterator] = item.weight;
-                    arrayIterator++;
-                }      
-            }
-
-            Person_1.Content = names[0];
-            Person_2.Content = names[1];
-            Person_3.Content = names[2];
-
-            
-            base.OnNavigatedTo(e);
+            ModeText.Visibility = System.Windows.Visibility.Visible;
+            ModeText.Text = "Select person to edit";
+            Random_Person.Content = "Cancel";
+            mode = "Edit";
+            //this.NavigationService.Navigate(new Uri("/EditOverview.xaml", UriKind.Relative));
         }
+
+
 
         
 
 
 
-        // Sample code for building a localized ApplicationBar
+        //// Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{
         //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
@@ -148,6 +166,8 @@ namespace Mobile_project
         //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
         //    ApplicationBar.MenuItems.Add(appBarMenuItem);
         //}
+
+
        
     }
 

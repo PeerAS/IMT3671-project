@@ -51,6 +51,16 @@ namespace Mobile_project.ViewModel
             person.Add(newPerson);
 
             personDB.PersonDataTable.InsertOnSubmit(newPerson);
+            
+        }
+
+        public void UpdatePerson(int personID)
+        {
+            IQueryable test = from PersonData personExist in personDB.PersonDataTable
+                              where personExist.personID == personID
+                              select personExist;
+
+            
         }
 
 

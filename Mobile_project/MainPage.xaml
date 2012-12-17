@@ -48,10 +48,11 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" >
-            <Button x:Name="Person_1" Content="" Margin="85,65,75,473" Click="Person_1_Click"/>
-            <Button x:Name="Person_2" Content="" Margin="85,171,75,367" RenderTransformOrigin="0.624,0.568" Click="Person_2_Click"/>
-            <Button x:Name="Person_3" Content="" Margin="85,285,75,253" Click="Person_3_Click" />
-            <Button x:Name="Random_Person" Content="Other Person" Margin="85,391,75,147" Click="Other_Person_Click" />
+            <TextBlock x:Name="ModeText" Text="" Visibility="Collapsed" Margin="85,17,75,478"/>
+            <Button x:Name="Person_1" Content="" Margin="85,65,75,395" Height="80" Click="Person_1_Click"/>
+            <Button x:Name="Person_2" Content="" Margin="85,171,75,290" Height="80" RenderTransformOrigin="0.624,0.568" Click="Person_2_Click"/>
+            <Button x:Name="Person_3" Content="" Margin="85,285,75,175"  Height="80" Click="Person_3_Click" />
+            <Button x:Name="Random_Person" Content="Other Person" Height="80" Margin="85,391,75,75" Click="Other_Person_Click" />
         </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
@@ -61,6 +62,14 @@
 
             Before shipping remove this XAML and the image itself.-->
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
+        
     </Grid>
-
+         <phone:PhoneApplicationPage.ApplicationBar>
+            <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Edit/Delete Person" Click="edit_delete_person_OnClick"/>
+                <shell:ApplicationBarMenuItem Text="Credits"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

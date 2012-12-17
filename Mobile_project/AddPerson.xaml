@@ -33,6 +33,8 @@
             <TextBlock x:Name="RegisterWeightText" Height="50" Text="Weight(kg)" Margin="0,166,293,403" FontSize="30"/>
             <TextBox x:Name="RegisterWeightInput" Height="70" Text="" Margin="163,151,0,398"  InputScope="Number"/>
             <Button x:Name="RegisterButton" Content="Register" Margin="101,395,101,139" Click="RegisterButton_Click" />
+            <RadioButton x:Name="RadioMale" Content="Male" HorizontalAlignment="Left" Margin="10,226,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="RadioFemale" Content="Female" HorizontalAlignment="Left" Margin="10,298,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 

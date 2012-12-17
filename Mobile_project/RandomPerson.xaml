@@ -29,8 +29,11 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock x:Name="RandomWeightText" Text="Weight (kg)" FontSize="30" Margin="0,72,280,494"/>
-            <TextBox x:Name="RandomWeightInput" Text="" Margin="231,56,0,494" InputScope="Number"/>
+            <TextBox x:Name="RandomWeightInput" Text="" Height="70" Margin="231,56,0,494" InputScope="Number"/>
             <Button x:Name="RandomContinue" Content="Continue" Margin="96,444,96,80" FontSize="35" Click="RandomContinue_Click"/>
+            <RadioButton x:Name="RadioMale" Content="Male" Margin="0,168,263,0" VerticalAlignment="Top" Checked="RadioMale_Checked"/>
+            <RadioButton x:Name="RadioFemale" Content="Female" HorizontalAlignment="Left" Margin="0,245,0,0" VerticalAlignment="Top" Checked="RadioFemale_Checked"/>
+
         </Grid>
     </Grid>
 

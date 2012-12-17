@@ -24,8 +24,12 @@ namespace Mobile_project
         private int noOfStrongWine;
         private int noOfVodka;
         private int personID;
+
         private double totalGramOfAlc;
         private double weight;
+
+        private string randomSex;
+        private string personSex;
 
 
 
@@ -50,15 +54,22 @@ namespace Mobile_project
             //For kvinner: Alkohol i gram / (kroppsvekten i kg x 60%) - (0,15 x timer fra drikkestart) = promille
             //For menn: Alkohol i gram / (kroppsvekten i kg x 70%) - (0,15 x timer fra drikkestart) = promille
 
-            if (personID != 0)
+            if (personID > 0) //there doesn't exist an index 0
             {
                 var person = from personTable in App._appViewModel.person
                              where personTable.personID == personID
-                             select new { weight = personTable.personWeight };
+                             select new { weight = personTable.personWeight, sex = personTable.personSex };
 
                 foreach (var personWeight in person)
+                {
                     weight = personWeight.weight;
+                    personSex = personWeight.sex;
+                }
 
+            }
+            else if (randomSex != null)
+            {
+                personSex = randomSex;
             }
 
             noOfBeer05 = Convert.ToInt32(BeerAmount_05.Text);
@@ -69,7 +80,11 @@ namespace Mobile_project
 
             totalGramOfAlc = ((gramofAlcInBeer05 * noOfBeer05) + (gramOfAlcInBeer33 * noOfBeer33) + (gramOfAlcInStrongWine * noOfStrongWine) + (gramOfAlcInVodka * noOfVodka) + (gramOfAlcInWine * noOfWine));
 
-            currentBloodAlcLevel = ((totalGramOfAlc / (weight * 0.70)) - (0.15 * timeDifference));
+            if (personSex == "Male")
+                currentBloodAlcLevel = ((totalGramOfAlc / (weight * 0.70)) - (0.15 * timeDifference));
+            else if (personSex == "Female")
+                currentBloodAlcLevel = ((totalGramOfAlc / (weight * 0.60)) - (0.15 * timeDifference));
+
 
             this.NavigationService.Navigate(new Uri("/ResultPage.xaml?bloodAlc=" + currentBloodAlcLevel, UriKind.Relative));
         }
@@ -82,14 +97,21 @@ namespace Mobile_project
             noOfVodka = 0;
             noOfWine = 0;
 
-            string tempDifference;
-            string tempID;
+            string tempDifference = null;
+            string tempID = null;
+            string tempWeight = null;
+            string tempSex = null;
+            
+
             NavigationContext.QueryString.TryGetValue("time", out tempDifference);
             NavigationContext.QueryString.TryGetValue("id", out tempID);
-
-
-            timeDifference = Convert.ToInt32(tempDifference);
+            NavigationContext.QueryString.TryGetValue("weight", out tempWeight);
+            NavigationContext.QueryString.TryGetValue("sex", out tempSex);
+                
             personID = Convert.ToInt32(tempID);
+            timeDifference = Convert.ToInt32(tempDifference);
+            weight = Convert.ToDouble(tempWeight);
+            randomSex = tempSex;
 
             
             base.OnNavigatedTo(e);

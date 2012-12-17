@@ -20,6 +20,8 @@ namespace Mobile_project
         private string time_minutes;
         private string total_time;
         private string currentTimeString;
+        private string randomPersonSex;
+        private string weightString;
 
         private DateTime drinkingStarted;     
         private TimeSpan drinkingTime;
@@ -46,18 +48,23 @@ namespace Mobile_project
             //drinkingTime = currentTime.Subtract(drinkingStarted);
             temp_difference = time_hours;
 
-            this.NavigationService.Navigate(new Uri("/DrinkOverview.xaml?time="+temp_difference + "&id=" +personID, UriKind.Relative));
+            if (randomPersonSex == null)
+                this.NavigationService.Navigate(new Uri("/DrinkOverview.xaml?time=" + temp_difference + "&id=" + personID, UriKind.Relative));
+            else
+                this.NavigationService.Navigate(new Uri("/DrinkOverview.xaml?time=" + temp_difference + "&weight=" + weightString + "&sex=" + randomPersonSex, UriKind.Relative));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string weightString;
+            
             string personIDString;
+            randomPersonSex = null;
 
             base.OnNavigatedTo(e);
 
             NavigationContext.QueryString.TryGetValue("weight", out weightString);
             NavigationContext.QueryString.TryGetValue("id", out personIDString);
+            NavigationContext.QueryString.TryGetValue("sex", out randomPersonSex);
 
             weight = Convert.ToDouble(weightString);
             personID = Convert.ToInt32(personIDString);

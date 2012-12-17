@@ -12,9 +12,18 @@ namespace Mobile_project
 {
     public partial class ResultPage : PhoneApplicationPage
     {
+        private double legalDrivingLimit;
+        private string currentBloodAlc;
+        private DateTime hoursTilDrivingLimit;
+        
+
         public ResultPage()
         {
             InitializeComponent();
+
+            currentBloodAlc = string.Format("0.00", currentBloodAlc);
+            hoursTilDrivingLimit = new DateTime(0);
+            legalDrivingLimit = 0.2;
         }
 
         private void ResultMainMenu_Click(object sender, RoutedEventArgs e)
@@ -25,10 +34,23 @@ namespace Mobile_project
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            string currentBloodAlc;
-            NavigationContext.QueryString.TryGetValue("bloodAlc", out currentBloodAlc);
 
+            int hours = 0;
+            double bloodAlcoholLevel;
+            NavigationContext.QueryString.TryGetValue("bloodAlc", out currentBloodAlc);
+            currentBloodAlc = currentBloodAlc.Substring(0, 4);
+            
             ResultAlcoholLevelDisplay.Text = currentBloodAlc;
+            bloodAlcoholLevel = Convert.ToDouble(currentBloodAlc);
+            
+            while (bloodAlcoholLevel > legalDrivingLimit)
+            {
+                bloodAlcoholLevel = bloodAlcoholLevel - 0.15;
+                hours++;
+            }
+            hoursTilDrivingLimit = DateTime.Now;
+            hoursTilDrivingLimit = hoursTilDrivingLimit.AddHours(hours);
+            ResultDisplayTime.Text = Convert.ToString(hoursTilDrivingLimit);
         }
     }
 }
