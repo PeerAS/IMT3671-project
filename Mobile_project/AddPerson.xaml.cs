@@ -92,12 +92,13 @@ namespace Mobile_project
                 if (mode == "Edit") //this is where the database update function will be used
                 {
                     weight = Convert.ToDouble(this.RegisterWeightInput.Text);
+                    name = Convert.ToString(this.RegisterNameInput.Text);
 
                     var personname = from personTable in App._appViewModel.person
                                      where personTable.personID == tempPersonID
                                      select personTable;
 
-                    App._appViewModel.UpdatePerson(tempPersonID);
+                    App._appViewModel.UpdatePerson(tempPersonID, name, weight);
                 }
                 else
                 {   

@@ -89,7 +89,7 @@ namespace Mobile_project
                           where personTable.personID == personID
                           select new { Id = personTable.personID };
             
-            if (mode == "Edit" ||mode == "Delete" && person1.Count() == 0)
+            if ((mode == "Edit" || mode == "Delete")  && person1.Count() == 0)
             {                
                 MessageBox.Show(emptyUser);
             }

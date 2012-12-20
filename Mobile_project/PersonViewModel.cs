@@ -54,13 +54,16 @@ namespace Mobile_project.ViewModel
             
         }
 
-        public void UpdatePerson(int personID)  //doesn't work yet
+        public void UpdatePerson(int personID, string name, double personWeight)  //doesn't work yet
         {
             IQueryable<PersonData> test = from PersonData personExist in personDB.PersonDataTable
                                         where personExist.personID == personID
                                         select personExist;
 
-            
+            test.Where(person => person.personID == personID).First().personName = name;
+            test.Where(person => person.personID == personID).First().personWeight = personWeight;
+
+            personDB.SubmitChanges();
         }
 
         public void DeletePerson(int personID)
