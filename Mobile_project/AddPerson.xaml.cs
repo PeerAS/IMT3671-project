@@ -27,7 +27,7 @@ namespace Mobile_project
         private string mode;
         private string tempID;
         private double weight;
-        private int personID;
+        private int tempPersonID;
 
 
         public AddPerson()
@@ -44,11 +44,13 @@ namespace Mobile_project
             NavigationContext.QueryString.TryGetValue("mode", out mode);
             NavigationContext.QueryString.TryGetValue("id", out tempID);
 
+            tempPersonID = Convert.ToInt32(tempID);
+
             if (mode == "Edit") //if we are in edit mode
             {
-                personID = Convert.ToInt32(tempID);
+                tempPersonID = Convert.ToInt32(tempID);
                 var personname = from personTable in App._appViewModel.person
-                                 where personTable.personID == personID
+                                 where personTable.personID == tempPersonID
                                  select new { name = personTable.personName, weight = personTable.personWeight, sex = personTable.personSex };
 
                 foreach (var item in personname)
@@ -92,8 +94,10 @@ namespace Mobile_project
                     weight = Convert.ToDouble(this.RegisterWeightInput.Text);
 
                     var personname = from personTable in App._appViewModel.person
-                                     where personTable.personID == personID
+                                     where personTable.personID == tempPersonID
                                      select personTable;
+
+                    App._appViewModel.UpdatePerson(tempPersonID);
                 }
                 else
                 {   
@@ -107,7 +111,8 @@ namespace Mobile_project
                     {
                         personName = this.RegisterNameInput.Text,
                         personWeight = weight,
-                        personSex = sex
+                        personSex = sex,
+                        personID = tempPersonID
 
                     };
 

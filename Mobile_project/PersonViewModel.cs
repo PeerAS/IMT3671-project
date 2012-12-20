@@ -56,13 +56,25 @@ namespace Mobile_project.ViewModel
 
         public void UpdatePerson(int personID)  //doesn't work yet
         {
-            IQueryable test = from PersonData personExist in personDB.PersonDataTable
-                              where personExist.personID == personID
-                              select personExist;
+            IQueryable<PersonData> test = from PersonData personExist in personDB.PersonDataTable
+                                        where personExist.personID == personID
+                                        select personExist;
 
             
         }
 
+        public void DeletePerson(int personID)
+        {
+           IQueryable<PersonData> test = from PersonData personToDelete in personDB.PersonDataTable
+                                         where personToDelete.personID == personID
+                                         select personToDelete;
+           
+            
+            person.Remove(test.First());
+            personDB.PersonDataTable.DeleteOnSubmit(test.First());
+
+            personDB.SubmitChanges();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

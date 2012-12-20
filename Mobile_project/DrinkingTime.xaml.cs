@@ -83,5 +83,24 @@ namespace Mobile_project
             DrinkingTimeMinutes.Text = "";
         }
 
+        private void DrinkingTimeMinutes_LostFocus(object sender, RoutedEventArgs e)
+        {
+            double tempMinutes = Convert.ToDouble(DrinkingTimeMinutes.Text.ToString());
+            if (DrinkingTimeMinutes.Text == "")
+                DrinkingTimeMinutes.Text = "00";
+            else if (tempMinutes >= 60)
+                DrinkingTimeMinutes.Text = "59";                
+        }
+
+        private void DrinkingTimeHours_LostFocus(object sender, RoutedEventArgs e)
+        {
+            double tempHours = Convert.ToDouble(DrinkingTimeHours.Text.ToString());
+
+            if (DrinkingTimeHours.Text == "")
+                DrinkingTimeHours.Text = "00";
+            else if (tempHours >= 24)
+                DrinkingTimeHours.Text = "23";
+        }
+
     }
 }

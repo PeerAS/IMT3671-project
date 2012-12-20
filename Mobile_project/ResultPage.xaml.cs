@@ -15,6 +15,7 @@ namespace Mobile_project
     {
         private double legalDrivingLimit;
         private string currentBloodAlc;
+        private string personSex;
         private DateTime hoursTilDrivingLimit;
         
 
@@ -46,7 +47,6 @@ namespace Mobile_project
             
             while (bloodAlcoholLevel >= legalDrivingLimit)
             {
-                //this must be changed to reflect sex
                 bloodAlcoholLevel = bloodAlcoholLevel - 0.15;
                 hours++;
             }

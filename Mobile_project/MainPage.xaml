@@ -67,7 +67,8 @@
          <phone:PhoneApplicationPage.ApplicationBar>
             <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Edit/Delete Person" Click="edit_delete_person_OnClick"/>
+                <shell:ApplicationBarMenuItem Text="Edit Person" Click="edit_delete_person_OnClick"/>
+                <shell:ApplicationBarMenuItem Text="Delete Person" Click="DeletePerson_OnClick"/>
                 <shell:ApplicationBarMenuItem Text="Credits"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

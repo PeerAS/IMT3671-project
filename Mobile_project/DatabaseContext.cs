@@ -25,7 +25,7 @@ namespace Database.Model
     {
         private int _personID;
 
-        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
+        [Column(IsPrimaryKey = true)]
         public int personID
         {
             get

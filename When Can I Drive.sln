@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobile_project", "Mobile_project\Mobile_project.csproj", "{6FF31EA0-43FB-4560-BC8C-23BD64B470B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "When Can I Drive", "Mobile_project\When Can I Drive.csproj", "{6FF31EA0-43FB-4560-BC8C-23BD64B470B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

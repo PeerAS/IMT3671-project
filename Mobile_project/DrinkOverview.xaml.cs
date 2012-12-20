@@ -102,7 +102,6 @@ namespace Mobile_project
             string tempWeight = null;
             string tempSex = null;
             
-
             NavigationContext.QueryString.TryGetValue("time", out tempDifference);
             NavigationContext.QueryString.TryGetValue("id", out tempID);
             NavigationContext.QueryString.TryGetValue("weight", out tempWeight);
@@ -112,7 +111,6 @@ namespace Mobile_project
             timeDifference = Convert.ToInt32(tempDifference);
             weight = Convert.ToDouble(tempWeight);
             randomSex = tempSex;
-
             
             base.OnNavigatedTo(e);
         }

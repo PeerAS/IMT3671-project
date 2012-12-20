@@ -25,6 +25,7 @@ namespace Mobile_project
         private int arrayIterator;
         private int personID;
         private string mode;
+        private string emptyUser;
 
         // Constructor
         public MainPage()
@@ -32,7 +33,7 @@ namespace Mobile_project
             
             InitializeComponent();
             names = new string[MAX_USERS]{"Register New Person", "Register New Person", "Register New Person"};
-            weights = new double[MAX_USERS]{0, 0, 0};
+            emptyUser = "There is no registered person here.";
 
             arrayIterator = 0;
             this.DataContext = App._appViewModel;
@@ -50,14 +51,12 @@ namespace Mobile_project
             {
                 var personname = from personTable in App._appViewModel.person   //select from the observable collection person
                                  where personTable.personID <= MAX_USERS        //and put it in a var.
-                                 select new { Name = personTable.personName, weight = personTable.personWeight };
+                                 select new { Name = personTable.personName, Id = personTable.personID };
 
 
                 foreach (var item in personname)
                 {
-                    names[arrayIterator] = item.Name;
-                    weights[arrayIterator] = item.weight;
-                    arrayIterator++;
+                    names[item.Id] = item.Name;
                 }
             }
 
@@ -71,68 +70,116 @@ namespace Mobile_project
 
         private void Other_Person_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("/RandomPerson.xaml", UriKind.Relative));
+            if (mode == "Edit")
+            {
+                this.Random_Person.Content = "Other Person";
+                mode = null;
+                ModeText.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                this.NavigationService.Navigate(new Uri("/RandomPerson.xaml", UriKind.Relative));
+            }
         }
 
         private void Person_1_Click(object sender, RoutedEventArgs e)
         {
-            if (mode == "Edit")
-            {
-                personID = 1;
-                this.NavigationService.Navigate(new Uri("/AddPerson.xaml?mode="+mode+"&id="+personID, UriKind.Relative));
-                
-            }
+            personID = 0;
             var person1 = from personTable in App._appViewModel.person
-                          where personTable.personID == 1
+                          where personTable.personID == personID
                           select new { Id = personTable.personID };
-
-            if (person1.Count() == 0)
+            
+            if (mode == "Edit" ||mode == "Delete" && person1.Count() == 0)
+            {                
+                MessageBox.Show(emptyUser);
+            }
+            else if (mode == "Edit")
+            {                
+                this.NavigationService.Navigate(new Uri("/AddPerson.xaml?mode="+mode+"&id="+personID, UriKind.Relative));
+            }
+            else if (mode == "Delete")
             {
-                this.NavigationService.Navigate(new Uri("/Addperson.xaml", UriKind.Relative));
+                App._appViewModel.DeletePerson(personID);
+                Person_1.Content = "Register Person";
+                Random_Person.Content = "Other Person";
+                ModeText.Visibility = System.Windows.Visibility.Collapsed;
+                mode = "";
             }
             else if (person1.Count() == 1)
             {
-                foreach(var person in person1)
-                    personID = person.Id;
-
-                double temp_weight = weights[0];
-                this.NavigationService.Navigate(new Uri("/DrinkingTime.xaml?id="+personID, UriKind.Relative));
+                this.NavigationService.Navigate(new Uri("/DrinkingTime.xaml?id=" + personID, UriKind.Relative));
+            }
+            else if (person1.Count() == 0)
+            {
+                this.NavigationService.Navigate(new Uri("/Addperson.xaml?id=" + personID, UriKind.Relative));
             }
            
         }
 
         private void Person_2_Click(object sender, RoutedEventArgs e)
         {
+            personID = 1;
             var person2 = from personTable in App._appViewModel.person
-                          where personTable.personID == 2
-                          select new { Name = personTable.personName, weight = personTable.personWeight };
-
-            if (person2.Count() == 0)
+                          where personTable.personID == personID
+                          select new { Id = personTable.personID};
+           
+            if (mode == "Edit" && person2.Count() == 0)
             {
-                this.NavigationService.Navigate(new Uri("/AddPerson.xaml", UriKind.Relative));   
+                MessageBox.Show(emptyUser);
+            }
+            else if (mode == "Edit")
+            {
+                this.NavigationService.Navigate(new Uri("/AddPerson.xaml?mode=" + mode + "&id=" + personID, UriKind.Relative));
+            }
+            else if (mode == "Delete")
+            {
+                App._appViewModel.DeletePerson(personID);
+                Person_2.Content = "Register Person";
+                Random_Person.Content = "Other Person";
+                ModeText.Visibility = System.Windows.Visibility.Collapsed;
+                mode = "";
+            }
+            else if (person2.Count() == 0)
+            {
+                this.NavigationService.Navigate(new Uri("/AddPerson.xaml?id=" + personID, UriKind.Relative));
             }
             else if (person2.Count() == 1)
             {
-                double temp_weight = weights[1];
-                this.NavigationService.Navigate(new Uri("/DrinkingTime.xaml?weight=" + temp_weight, UriKind.Relative));
+                this.NavigationService.Navigate(new Uri("/DrinkingTime.xaml?id=" + personID, UriKind.Relative));
             }
 
         }
 
         private void Person_3_Click(object sender, RoutedEventArgs e)
         {
+            personID = 2;
             var person3 = from personTable in App._appViewModel.person
-                          where personTable.personID == 3
-                          select new { Name = personTable.personName, weight = personTable.personWeight };
+                          where personTable.personID == personID
+                          select new { Id = personTable.personID };
 
-            if (person3.Count() == 0)
+            if (mode == "Edit" && person3.Count() == 0)
             {
-                this.NavigationService.Navigate(new Uri("/AddPerson.xaml", UriKind.Relative));
+                MessageBox.Show(emptyUser);
+            }
+            else if (mode == "Edit")
+            {
+                this.NavigationService.Navigate(new Uri("/AddPerson.xaml?mode=" + mode + "&id=" + personID, UriKind.Relative));
+            }
+            else if (mode == "Delete")
+            {
+                App._appViewModel.DeletePerson(personID);
+                Person_3.Content = "Register Person";
+                Random_Person.Content = "Other Person";
+                ModeText.Visibility = System.Windows.Visibility.Collapsed;
+                mode = "";
+            }
+            else if (person3.Count() == 0)
+            {
+                this.NavigationService.Navigate(new Uri("/AddPerson.xaml?id=" + personID, UriKind.Relative));
             }
             else if (person3.Count() == 1)
             {
-                double temp_weight = weights[2];
-                this.NavigationService.Navigate(new Uri("/DrinkingTime.xaml?weight="+ temp_weight, UriKind.Relative));
+                this.NavigationService.Navigate(new Uri("/DrinkingTime.xaml?id=" + personID, UriKind.Relative));
             }
         }
 
@@ -142,14 +189,15 @@ namespace Mobile_project
             ModeText.Text = "Select person to edit";
             Random_Person.Content = "Cancel";
             mode = "Edit";
-            //this.NavigationService.Navigate(new Uri("/EditOverview.xaml", UriKind.Relative));
         }
 
-
-
-        
-
-
+        private void DeletePerson_OnClick(object sender, EventArgs e)
+        {
+            ModeText.Visibility = System.Windows.Visibility.Visible;
+            ModeText.Text = "Select person to delete";
+            Random_Person.Content = "Cancel";
+            mode = "Delete";
+        }
 
         //// Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
@@ -166,9 +214,6 @@ namespace Mobile_project
         //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
         //    ApplicationBar.MenuItems.Add(appBarMenuItem);
         //}
-
-
-       
     }
 
    
